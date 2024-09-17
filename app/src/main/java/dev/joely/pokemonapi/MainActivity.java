@@ -23,25 +23,22 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
-                if (item.getItemId() == R.id.nav_pokemon_list) {
-                    selectedFragment = new PokemonListFragment();
-                } else if (item.getItemId() == R.id.nav_favorites) {
-                    selectedFragment = new FavoritesFragment();
-                } else if (item.getItemId() == R.id.nav_trainer) {
-                    selectedFragment = new TrainerFragment();
-                }
-
-                if (selectedFragment != null) {
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, selectedFragment)
-                            .commit();
-                }
-                return true;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            if (item.getItemId() == R.id.nav_pokemon_list) {
+                selectedFragment = new PokemonListFragment();
+            } else if (item.getItemId() == R.id.nav_favorites) {
+                selectedFragment = new FavoritesFragment();
+            } else if (item.getItemId() == R.id.nav_trainer) {
+                selectedFragment = new TrainerFragment();
             }
+
+            if (selectedFragment != null) {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, selectedFragment)
+                        .commit();
+            }
+            return true;
         });
 
         // Load default fragment (PokemonListFragment) when the activity starts

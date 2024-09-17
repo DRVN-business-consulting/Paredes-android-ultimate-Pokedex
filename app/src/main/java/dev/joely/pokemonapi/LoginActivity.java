@@ -48,7 +48,11 @@ public class LoginActivity extends AppCompatActivity {
                     String token = response.body().getAccessToken();
                     tokenManager.saveToken(token);
                     Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                    navigateToMainActivity();
+
+                    // Navigate to MainActivity
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish(); // Optional: close LoginActivity
                 } else {
                     Toast.makeText(LoginActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
                 }
@@ -59,11 +63,5 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void navigateToMainActivity() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish(); // Close the LoginActivity
     }
 }

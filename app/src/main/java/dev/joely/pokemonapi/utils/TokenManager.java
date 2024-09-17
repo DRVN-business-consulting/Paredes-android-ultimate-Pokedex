@@ -17,7 +17,7 @@ public class TokenManager {
 
     public void saveToken(String token) {
         ContentValues values = new ContentValues();
-        values.put("id", 1);  // Only one token, so always overwrite
+        values.put("id", 1);
         values.put(TOKEN_KEY, token);
         database.replace("token", null, values);
     }
@@ -25,7 +25,7 @@ public class TokenManager {
     public String getToken() {
         Cursor cursor = database.query("token", new String[]{TOKEN_KEY}, "id = ?", new String[]{"1"}, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
-            String token = cursor.getString(cursor.getColumnIndexOrThrow(TOKEN_KEY));
+            String token = cursor.getString(cursor.getColumnIndex(TOKEN_KEY));
             cursor.close();
             return token;
         }

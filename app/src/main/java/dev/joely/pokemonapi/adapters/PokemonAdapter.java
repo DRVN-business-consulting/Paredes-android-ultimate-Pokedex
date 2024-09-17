@@ -33,6 +33,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
         Pokemon pokemon = pokemonList.get(position);
         holder.pokemonName.setText(pokemon.getName().getEnglish());
         holder.pokemonType.setText(String.join(", ", pokemon.getType()));
+        holder.pokemonId.setText(String.valueOf(pokemon.getId())); // Set the Pokémon ID
 
         // Load the image using Glide or any other image loading library
         Glide.with(holder.itemView.getContext())
@@ -47,13 +48,15 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
 
     public static class PokemonViewHolder extends RecyclerView.ViewHolder {
         ImageView pokemonImage;
-        TextView pokemonName, pokemonType;
+        TextView pokemonName, pokemonType, pokemonId; // Add pokemonId
 
         public PokemonViewHolder(@NonNull View itemView) {
             super(itemView);
             pokemonImage = itemView.findViewById(R.id.pokemon_image);
             pokemonName = itemView.findViewById(R.id.pokemon_name);
             pokemonType = itemView.findViewById(R.id.pokemon_type);
+            pokemonId = itemView.findViewById(R.id.pokemon_id); // Initialize pokemonId
         }
     }
+
 }
