@@ -18,7 +18,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText;
-    private Button loginButton;
+    private Button loginButton, signUpButton;
     private UserApi userApi;
     private TokenManager tokenManager;
 
@@ -30,11 +30,16 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.login_button);
+        signUpButton = findViewById(R.id.signup_button);
 
         userApi = ApiClient.getClient(this).create(UserApi.class);
         tokenManager = new TokenManager(this);
 
         loginButton.setOnClickListener(v -> login());
+        signUpButton.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void login() {
@@ -48,9 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                     String token = response.body().getAccessToken();
                     tokenManager.saveToken(token);
                     Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish(); // Optionally finish the LoginActivity to prevent going back to it
+                    // Navigate to main activity or next step
                 } else {
                     Toast.makeText(LoginActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
                 }
