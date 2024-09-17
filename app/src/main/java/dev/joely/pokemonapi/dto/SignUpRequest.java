@@ -2,15 +2,15 @@ package dev.joely.pokemonapi.dto;
 
 public class SignUpRequest {
     private String username;
-    private String name;
     private String password;
+    private String name;
     private int age;
     private String address;
 
-    public SignUpRequest(String username, String name, String password, int age, String address) {
+    public SignUpRequest(String username, String password, String name, int age, String address) {
         this.username = username;
-        this.name = name;
         this.password = password;
+        this.name = name;
         this.age = age;
         this.address = address;
     }
