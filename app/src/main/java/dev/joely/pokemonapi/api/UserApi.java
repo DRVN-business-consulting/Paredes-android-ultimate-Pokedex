@@ -9,11 +9,9 @@ import retrofit2.http.POST;
 
 public interface UserApi {
 
-    @POST("login")
-    Call<TokenResponse> login(@Body LoginRequest loginRequest);
+    @POST("/login")
+    Call<TokenResponse> login(@Body LoginRequest request);
 
-    @POST("signup")
-    Call<TokenResponse> signup(@Body SignupRequest signupRequest);
-
-
+    @POST("/signup")
+    Call<TokenResponse> signup(@Body SignupRequest request);
 }

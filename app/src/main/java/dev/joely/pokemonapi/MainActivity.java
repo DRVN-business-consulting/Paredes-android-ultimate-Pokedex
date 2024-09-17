@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Load default fragment
+        // Load default fragment (PokemonListFragment) when the activity starts
         if (savedInstanceState == null) {
-            bottomNavigationView.setSelectedItemId(R.id.nav_pokemon_list); // Load default fragment
+            bottomNavigationView.setSelectedItemId(R.id.nav_pokemon_list); // Set PokemonList as default
         }
     }
 }

@@ -7,9 +7,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
+import com.bumptech.glide.Glide;
 import dev.joely.pokemonapi.R;
-import dev.joely.pokemonapi.models.Pokemon;
+import dev.joely.pokemonapi.dto.Pokemon;
+
+import java.util.List;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder> {
 
@@ -29,7 +31,13 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
     @Override
     public void onBindViewHolder(@NonNull PokemonViewHolder holder, int position) {
         Pokemon pokemon = pokemonList.get(position);
-        holder.bind(pokemon);
+        holder.pokemonName.setText(pokemon.getName().getEnglish());
+        holder.pokemonType.setText(String.join(", ", pokemon.getType()));
+
+        // Load the image using Glide or any other image loading library
+        Glide.with(holder.itemView.getContext())
+                .load(pokemon.getImage().getSprite())
+                .into(holder.pokemonImage);
     }
 
     @Override
@@ -38,21 +46,14 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.PokemonV
     }
 
     public static class PokemonViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView pokemonNameTextView;
-        private ImageView pokemonImageView;
+        ImageView pokemonImage;
+        TextView pokemonName, pokemonType;
 
         public PokemonViewHolder(@NonNull View itemView) {
             super(itemView);
-            pokemonNameTextView = itemView.findViewById(R.id.pokemon_name);
-            pokemonImageView = itemView.findViewById(R.id.pokemon_image);
-        }
-
-        public void bind(Pokemon pokemon) {
-            pokemonNameTextView.setText(pokemon.getName());
-            // Assuming you have a way to load images, like using Glide or Picasso
-            // Glide.with(itemView.getContext()).load(pokemon.getImageUrl()).into(pokemonImageView);
-            pokemonImageView.setImageResource(R.drawable.ic_favorites); // Placeholder image, replace with actual image logic
+            pokemonImage = itemView.findViewById(R.id.pokemon_image);
+            pokemonName = itemView.findViewById(R.id.pokemon_name);
+            pokemonType = itemView.findViewById(R.id.pokemon_type);
         }
     }
 }
