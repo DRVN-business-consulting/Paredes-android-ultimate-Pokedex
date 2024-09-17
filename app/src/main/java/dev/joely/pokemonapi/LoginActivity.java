@@ -48,11 +48,9 @@ public class LoginActivity extends AppCompatActivity {
                     String token = response.body().getAccessToken();
                     tokenManager.saveToken(token);
                     Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-
-                    // Navigate to MainActivity
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
-                    finish(); // Optional: close LoginActivity
+                    finish(); // Optionally finish the LoginActivity to prevent going back to it
                 } else {
                     Toast.makeText(LoginActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
                 }
